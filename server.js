@@ -19,6 +19,8 @@ app.get('/', function (req, res) {
   res.status(200).send('<h1>Server running</h1>')
 })
 
+require('./routes')(app)
+
 app.post('/create_preference', (req, res) => {
   const preference = new Preference(client)
 
@@ -43,6 +45,7 @@ app.post('/create_preference', (req, res) => {
         { id: 'visa' }, // Excluir tarjetas Visa
       ],
     },
+    notification_url: 'https://mercadopago-api-mutuo-hidden-snow-7668.fly.dev/webhook/mercadopago?source_news=webhooks',
   }
 
   const requestOptions = {
