@@ -89,10 +89,19 @@ async function processPaymentNotification(body) {
   const client = new MercadoPagoConfig({ accessToken: config.access_token })
   const payment = new Payment(client)
 
-  payment
-    .get({
-      id: '123456789',
-    })
-    .then(console.log)
-    .catch(console.log)
+  console.log({ data: body.data })
+
+  if (body.type === 'payment') {
+    payment
+      .get({
+        id: body.data.id,
+      })
+      .then(console.log)
+      .catch(console.log)
+  }
+
+  // Alertas de fraude
+  if (body.type === 'stop_delivery_op_wh') {
+    console.log('Fraude -> ', body.data.payment_id)
+  }
 }
