@@ -8,7 +8,6 @@ const MercadoPagoConfig = mercadopago.MercadoPagoConfig
 const Preference = mercadopago.Preference
 
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
-console.log(process.env.ACCESS_TOKEN)
 const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN, options: { timeout: 5000 } })
 
 app.use(express.urlencoded({ extended: false }))
@@ -46,7 +45,7 @@ app.post('/create_preference', (req, res) => {
       ],
     },
     notification_url: 'https://mercadopago-api-mutuo-hidden-snow-7668.fly.dev/webhook/mercadopago?source_news=webhooks',
-    external_reference: 'jandreys15@gmail.com',
+    external_reference: '1234',
   }
 
   const requestOptions = {

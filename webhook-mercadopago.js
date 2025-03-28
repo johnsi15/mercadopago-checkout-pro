@@ -20,6 +20,7 @@ module.exports = function webhookMercadoPago(req, res) {
         hasRequestId: !!xRequestId,
         hasDataId: !!dataID,
       })
+
       return res.status(400).send('Invalid request')
     }
 
@@ -63,6 +64,7 @@ module.exports = function webhookMercadoPago(req, res) {
         calculatedHash,
         receivedHash: hash,
       })
+
       return res.status(400).send('Invalid signature')
     }
 
@@ -89,14 +91,15 @@ async function processPaymentNotification(body) {
   const client = new MercadoPagoConfig({ accessToken: config.access_token })
   const payment = new Payment(client)
 
-  console.log({ data: body.data })
-
   if (body.type === 'payment') {
     payment
       .get({
         id: body.data.id,
       })
-      .then(console.log)
+      .then(() => {
+        console.log('Pago -> ', body.data.id)
+        // Actualizar el estado de pago en la base de datos
+      })
       .catch(console.log)
   }
 
