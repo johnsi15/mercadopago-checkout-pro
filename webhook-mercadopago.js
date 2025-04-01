@@ -86,6 +86,7 @@ module.exports = function webhookMercadoPago(req, res) {
   }
 }
 
+// https://www.mercadopago.com.co/developers/es/reference/payments/_payments_id/get
 async function processPaymentNotification(body) {
   // Actualizar estado de pago, enviar confirmaciones, etc.
   const client = new MercadoPagoConfig({ accessToken: config.access_token })
@@ -96,8 +97,8 @@ async function processPaymentNotification(body) {
       .get({
         id: body.data.id,
       })
-      .then(() => {
-        console.log('Pago -> ', body.data.id)
+      .then(dataPayment => {
+        console.log('Pago -> ', dataPayment)
         // Actualizar el estado de pago en la base de datos
       })
       .catch(console.log)
