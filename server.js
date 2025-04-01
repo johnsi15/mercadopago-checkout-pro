@@ -45,7 +45,7 @@ app.post('/create_preference', (req, res) => {
       ],
     },
     notification_url: 'https://mercadopago-api-mutuo-hidden-snow-7668.fly.dev/webhook/mercadopago?source_news=webhooks',
-    external_reference: '1234',
+    external_reference: req.body.uuid,
   }
 
   const requestOptions = {
